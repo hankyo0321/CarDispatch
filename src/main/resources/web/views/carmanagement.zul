@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:n="native">
+	<borderlayout width="100%" height="100%">
+		<!-- 側邊欄 -->
+		<!-- 左側側邊欄 -->
+		<west size="220px" id="sidebar" collapsible="true"
+			splittable="true">
+			<include src="~./views/sidebar.zul" />
+		</west>
+
+		<!-- 主內容 -->
+		<center>
+
+			<vlayout>
+				<!-- 收放按鈕與頁面路徑 -->
+				<hbox align="center" style="margin-bottom: 10px;">
+					<button label="≡" onClick="toggleSidebar()"
+						width="40px" />
+					<label value="首頁 / 派車管理 / 派車管理"
+						style="margin-left: 10px; font-size: 16px;" />
+				</hbox>
+				<window apply="">
+				
+					<hbox spacing="10px" style="padding-bottom:10px;">
+						<button id="" label="公司派車"
+							iconSclass="z-icon-plus" />
+						<button id="" label="外租車輛"
+							iconSclass="z-icon-plus"  />
+						<button id="" label="派車駁回"
+							iconSclass="z-icon-plus"  style="color :orange" />
+						<button label="審核通過" iconSclass="z-icon-check"
+							disabled="true" />
+						<button label="審核駁回" iconSclass="z-icon-ban"
+							disabled="true" />
+						<button label="導出" iconSclass="z-icon-download"
+							disabled="true" />
+					</hbox>
+
+					<!-- 搜尋與條件篩選區 -->
+					<hbox style="margin-bottom: 10px;">
+						<label value="日期範圍：" />
+						<datebox id="startDate" width="150px"
+							placeholder="開始日期" />
+						<label value="至" />
+						<datebox id="endDate" width="150px"
+							placeholder="結束日期" />
+						<textbox id="派車單號" placeholder="派車單號"
+							width="200px" />
+						<textbox id="候車地點" placeholder="候車地點"
+							width="200px" />
+						<button label="搜尋" iconSclass="z-icon-search" />
+						<button label="重置" iconSclass="z-icon-refresh" />
+					</hbox>
+
+					<!-- 資料表格 -->
+					<grid>
+						<columns>
+							<column label="主鍵" width="80px" />
+							<column label="申請單號" width="200px" />
+							<column label="使用人" width="100px" />
+							<column label="預計出發" width="150px" />
+							<column label="部門" width="150px" />
+							<column label="審核狀態" width="100px" />
+							<column label="派車狀態" width="100px" />
+							<column label="用車性質" width="120px" />
+							<column label="用車等級" width="120px" />
+							<column label="申請人" width="100px" />
+							<column label="申請時間" width="150px" />
+							<column label="操作" width="100px" />
+						</columns>
+
+						<rows>
+							<row>
+								<label value="421" />
+								<label value="20250115091449" />
+								<label value="楊程文" />
+								<label value="2025-01-14 13:30" />
+								<label value="人資行政管理中心" />
+								<label value="已通過"
+									style="color: green;" />
+								<label value="已派車"
+									style="color: green;" />
+								<label value="緊急用車" />
+								<label value="一般" />
+								<label value="楊程文" />
+								<label value="2025-01-15 09:14" />
+								<hbox>
+									<button label="查看"
+										iconSclass="z-icon-eye" />
+									<button label="刪除"
+										iconSclass="z-icon-trash" />
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+				</window>
+				<!-- 分頁 -->
+				<paging pageSize="10" totalSize="100" />
+			</vlayout>
+		</center>
+	</borderlayout>
+
+	<zscript><![CDATA[
+	void toggleSidebar() {
+		Component sidebar = self.getFellow("sidebar");
+		sidebar.setVisible(!sidebar.isVisible());
+	}
+]]></zscript>
+</zk>

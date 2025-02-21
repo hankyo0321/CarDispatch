@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns:n="native">
+	<borderlayout width="100%">
+
+
+
+		<!-- 側邊欄 -->
+		<!-- 左側側邊欄 -->
+		<west size="220px" id="sidebar" collapsible="true"
+			splittable="true">
+			<include src="~./views/sidebar.zul" />
+		</west>
+
+
+
+		<!-- 主內容 -->
+		<center>
+			<!-- <include id="mainContent" src="/carapplication.zul" /> -->
+			<vlayout>
+				<!-- 收放按鈕與頁面路徑 -->
+				<hbox align="center" style="margin-bottom: 10px;">
+					<button label="≡" onClick="toggleSidebar()"
+						width="40px" />
+					<label value="首頁 / 派車管理 / 派車申請"
+						style="margin-left: 10px; font-size: 16px;" />
+				</hbox>
+				<window apply="${CarController}">
+
+					<hbox spacing="10px" style="padding-bottom:10px;">
+						<button id="createBtn" label="新增"
+							iconSclass="z-icon-plus" />
+						<button id="updateBtn" label="修改"
+							iconSclass="z-icon-edit" disabled="true" />
+						<button id="deleteBtn" label="刪除"
+							iconSclass="z-icon-trash" disabled="true" />
+						<button label="審核通過" iconSclass="z-icon-check"
+							disabled="true" />
+						<button label="審核駁回" iconSclass="z-icon-ban"
+							disabled="true" />
+						<button label="導出" iconSclass="z-icon-download"
+							disabled="true" />
+					</hbox>
+
+
+					<!-- 搜尋與條件篩選區 -->
+					<hbox style="margin-bottom: 10px;">
+						<label value="日期範圍：" />
+						<datebox id="startDate" width="150px"
+							placeholder="開始日期" />
+						<label value="至" />
+						<datebox id="endDate" width="150px"
+							placeholder="結束日期" />
+						<textbox id="textAppNo" placeholder="申請單號"
+							width="200px" />
+						<textbox id="textUser" placeholder="使用人"
+							width="200px" />
+						<button id="search" label="搜尋"
+							iconSclass="z-icon-search" />
+						<button onClick="clearTextbox()" label="重置"
+							iconSclass="z-icon-refresh" />
+					</hbox>
+
+					<!-- 資料表格 -->
+
+					<listbox id="carDispatchApplicationlist" rows="11"
+						emptyMessage="No car found in the result" checkmark="true">
+
+
+						<listhead width="100%">
+							<listheader label="選擇" width="60px" />
+							<listheader label="主鍵" width="60px" />
+							<listheader label="申請單號" width="100px" />
+							<listheader label="使用人" width="100px" />
+							<listheader label="預計出發" width="100px" />
+							<listheader label="部門" width="100px" />
+							<listheader label="審核狀態" width="100px" />
+							<listheader label="派車狀態" width="100px" />
+							<listheader label="用車性質" width="100px" />
+							<listheader label="用車等級" width="100px" />
+							<listheader label="申請人" width="100px" />
+							<listheader label="申請時間" width="110px" />
+							<listheader label="操作" width="180px" />
+						</listhead>
+
+						<template name="model">
+							<listitem>
+								<listcell />
+								<listcell label="${each.appID}"
+									value="${each.appID}">
+								</listcell>
+								<listcell label="${each.appNo}"
+									value="@load(each.appNo)">
+								</listcell>
+								<listcell label="${each.userName}"
+									value="${each.userName}">
+								</listcell>
+								<listcell label="${each.appDate}"
+									value="${each.appDate}">
+								</listcell>
+								<listcell label="${each.deptID}"
+									value="${each.deptID}">
+								</listcell>
+								<listcell label="${each.appStatus}"
+									value="${each.appStatus}">
+								</listcell>
+								<!-- 派車狀態 -->
+								<listcell label="${each.appStatus}"
+									value="${each.appStatus}">
+								</listcell>
+								<listcell label="${each.carTypeID}"
+									value="${each.carTypeID}">
+								</listcell>
+								<listcell label="${each.carLevel}"
+									value="@load(self.carLevel)">
+								</listcell>
+								<listcell label="${each.userName}"
+									value="${each.userName}">
+								</listcell>
+								<listcell label="${each.appDate}"
+									value="@load(self.appDate)">
+								</listcell>
+								<listcell>
+									<hbox width="100%">
+										<button iconSclass="z-icon-eye" />
+										<button
+											iconSclass="z-icon-edit" />
+										<button
+											iconSclass="z-icon-trash" />
+									</hbox>
+								</listcell>
+							</listitem>
+						</template>
+					</listbox>
+				</window>
+
+				<!-- 分頁 -->
+				<paging pageSize="10" totalSize="100" />
+			</vlayout>
+		</center>
+
+
+		<zscript><![CDATA[
+	void toggleSidebar() {
+		Component sidebar = self.getFellow("sidebar");
+		sidebar.setVisible(!sidebar.isVisible());
+	}
+	void clearTextbox() {
+		textUser.setValue("");
+
+	}
+]]></zscript>
+	</borderlayout>
+</zk>

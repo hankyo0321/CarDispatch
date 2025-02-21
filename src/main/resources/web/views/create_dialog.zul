@@ -1,0 +1,97 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk>
+
+	
+	<window id="modalDialog" title="新增派車申請" border="normal"
+		apply="${CarDispatchController}">
+		<vbox>
+			<hbox>
+				<label value="申請人" />
+				<textbox id="applyUser" />
+				<label value="申請時間" />
+				<datebox id="appDate"
+					value="${Dates.parse('yyyy-MM-dd HH:mm:ss', '2025-02-07 16:19:08')}"
+					readonly="true" />
+			</hbox>
+
+			<hbox>
+				<label value="用車性質" />
+				<radiogroup id="useType">
+					<hlayout>
+						<radio label="一般用車" value="1" />
+						<radio label="特殊用車" value="2" />
+						<radio label="緊急用車" value="3" />
+					</hlayout>
+				</radiogroup>
+			</hbox>
+
+			<hbox>
+				<label value="預計出發" />
+				<datebox id="expecedDateFm"
+					value="${Dates.parse('yyyy-MM-dd HH:mm:ss', '2025-02-07 20:30:00')}" />
+				<label value="預計返回" />
+				<datebox id="expecedDateTo" />
+			</hbox>
+
+			<hbox>
+				<label value="部門" />
+				<textbox id="deptID" />
+			</hbox>
+
+			<hbox>
+				<label value="用車等級" />
+				<radiogroup id="carLevel">
+					<hlayout>
+						<radio label="一般" value="1" />
+						<radio label="高級" value="2" />
+						<radio label="特殊" value="3" />
+					</hlayout>
+				</radiogroup>
+				<label value="車輛類型" />
+				<textbox id="carTypeID" />
+			</hbox>
+
+			<hbox>
+				<label value="使用人" />
+				<textbox id="userName"/>
+			</hbox>
+
+			<hbox>
+				<label value="乘座人數" />
+				<intbox id="numberOfPeole" />
+			</hbox>
+
+			<hbox>
+				<label value="隨車人員" />
+				<textbox id="companions" />
+			</hbox>
+
+			<hbox>
+				<label value="目的地址" />
+				<textbox id="destination" />
+			</hbox>
+
+			<hbox>
+				<label value="事由" />
+				<textbox id="reason" />
+			</hbox>
+
+			<hbox>
+				<label value="候車地點" />
+				<textbox id="waitingPlace" />
+			</hbox>
+
+			<hbox>
+				<label value="部門主管" />
+				<textbox value="張順清" readonly="true" />
+				<label value="廠主管" />
+				<textbox value="張順清" readonly="true" />
+			</hbox>
+
+			<hbox>
+				<button label="確定" id="submit" />
+				<button label="取消" id="cancel" />
+			</hbox>
+		</vbox>
+	</window>
+</zk>

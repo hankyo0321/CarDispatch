@@ -1,0 +1,3 @@
+<window apply="com.example.ZKSpringBoot.Controller.ChartController">
+    <charts id="chart" type="line" title="U.S Solar Employment Growth" />
+</window>
