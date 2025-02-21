@@ -70,6 +70,10 @@ public class UpdateCarController extends SelectorComposer<Window> {
         
         Map<String, Object> args = (Map<String, Object>) Executions.getCurrent().getArg();
         
+        
         CarDispatchApplication CarDispatchApplicationPO = (CarDispatchApplication) args.get("car");
-    }
+        
+        System.out.println("CarDispatchApplicationPO" + CarDispatchApplicationPO);
+        
+        applyUser.setValue(CarDispatchApplicationPO.getUserName());    }
 }
